@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
+  <title>BET 365</title>
+  <meta property="og:description" content="SOMOS TODOS DU!">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style type="text/css">
+    .checkbox, .radio {
+      margin-top: 0px;
+    }
+    .table {
+      margin-top: 15px;
+    }
+    .sucesso{
+      background-color: #5cb85c;
+    }
+    .erro{
+      background-color: #d9534f;
+    }
+    .neutro{
+      background-color: #f0ad4e;
+    }
+  </style>
+</head>
+<body ng-app="app" ng-controller="controller">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5 text-center">
+        <div class="row">
+          <div class="col-xs-4">
+            <h2>&nbsp;</h2>
+          </div>
+          <div class="col-xs-4">
+            <h2>Sortudo</h2>
+          </div>
+          <div class="col-xs-4">
+            <h2>Azarão</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 text-right">
+            <form class="form-inline">
+              <div class="form-group">
+                <label>Marcou gol?</label>
+              </div>
+            <form>
+            <form class="form-inline">
+              <div class="form-group">
+                <label>Venceu?</label>
+              </div>
+            <form>
+          </div>
+          <div class="col-xs-4">
+            <form class="form-inline">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="sortudoMarcou">Sim
+                </label>
+              </div>
+            <form>
+            <form class="form-inline">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="sortudoVenceu">Sim
+                </label>
+              </div>
+            <form>
+          </div>
+          <div class="col-xs-4">
+            <form class="form-inline">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="azaraoMarcou">Sim
+                </label>
+              </div>
+            <form>
+            <form class="form-inline">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="azaraoVenceu">Sim
+                </label>
+              </div>
+            <form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 text-right">
+            <button type="button" class="btn btn-default" ng-click="save()">Salvar</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <table class="table table-condensed table-bordered">
+          <thead>
+            <tr>
+              <th colspan="2" class="text-center">Sortudo</th>
+              <th colspan="2" class="text-center">Azarão</th>
+            </tr>
+            <tr>
+              <th class="text-center">Marcou gol?</th>
+              <th class="text-center">Venceu?</th>
+              <th class="text-center">Marcou gol?</th>
+              <th class="text-center">Venceu?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in list">
+              <td class="text-center" ng-class="{ 'sucesso': item.sortudoMarcou, 'erro': !item.sortudoMarcou }">&nbsp;</td>
+              <td class="text-center" ng-class="{ 'sucesso': item.sortudoVenceu, 'erro': !item.sortudoVenceu, 'neutro': !item.sortudoVenceu && !item.azaraoVenceu }">&nbsp;</td>
+              <td class="text-center" ng-class="{ 'sucesso': item.azaraoMarcou, 'erro': !item.azaraoMarcou }">&nbsp;</td>
+              <td class="text-center" ng-class="{ 'sucesso': item.azaraoVenceu, 'erro': !item.azaraoVenceu, 'neutro': !item.azaraoVenceu && !item.sortudoVenceu  }">&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+
+      'use strict';
+
+      angular.module('app', []);
+
+      angular.module('app').controller('controller', controller);
+
+      controller.$inject = ['$scope'];
+
+      function controller($scope) {
+
+        $scope.list = [];
+
+        $scope.clear = function(){
+          $scope.sortudoMarcou = false;
+          $scope.sortudoVenceu = false;
+          $scope.azaraoMarcou = false;
+          $scope.azaraoVenceu = false;
+        }
+
+        $scope.clear();
+
+        $scope.save = function(){
+          $scope.list.unshift({
+            date: new Date(),
+            sortudoMarcou: $scope.sortudoMarcou || $scope.sortudoMarcou ,
+            sortudoVenceu: $scope.sortudoVenceu,
+            azaraoMarcou: $scope.azaraoMarcou || $scope.azaraoVenceu,
+            azaraoVenceu: $scope.azaraoVenceu
+          })
+          $scope.clear();
+        };
+      }
+    })();
+  </script>
+</body>
+</html>
