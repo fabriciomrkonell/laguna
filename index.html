@@ -96,10 +96,12 @@
         <table class="table table-condensed table-bordered">
           <thead>
             <tr>
+              <th class="text-center">#</th>
               <th colspan="2" class="text-center">Sortudo</th>
               <th colspan="2" class="text-center">Azarão</th>
             </tr>
             <tr>
+              <th class="text-center">#</th>
               <th class="text-center">Marcou gol?</th>
               <th class="text-center">Venceu?</th>
               <th class="text-center">Marcou gol?</th>
@@ -108,6 +110,8 @@
           </thead>
           <tbody>
             <tr ng-repeat="item in list">
+              <td class="text-center" ng-show="$first">ÚLTIMO</td>
+              <td class="text-center" ng-show="!$first">{{list.length - $index}}</td>
               <td class="text-center" ng-class="{ 'sucesso': item.sortudoMarcou, 'erro': !item.sortudoMarcou }">&nbsp;</td>
               <td class="text-center" ng-class="{ 'sucesso': item.sortudoVenceu, 'erro': !item.sortudoVenceu, 'neutro': !item.sortudoVenceu && !item.azaraoVenceu }">&nbsp;</td>
               <td class="text-center" ng-class="{ 'sucesso': item.azaraoMarcou, 'erro': !item.azaraoMarcou }">&nbsp;</td>
